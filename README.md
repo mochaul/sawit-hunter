@@ -1,5 +1,9 @@
 # sawit-hunter
 
+Hanya bercanda
+Tidak untuk di DISTRIBUSIKAN, Hanya project iseng2 untuk HAHA HIHI
+Jangan Diseriusin
+
 To install dependencies:
 
 ```bash
@@ -11,6 +15,3 @@ To run:
 ```bash
 bun run 
 ```
-
-
-This just for fun project
