@@ -62,13 +62,7 @@ function resizeCanvas() {
 
 	// Adjust player position - bucket positioned lower on mobile for more catching space
 	if (player) {
-		// On mobile, position bucket at 85% down (more space above)
-		// On desktop, position bucket at 84% down
-		const bucketPositionRatio = isMobile ? 0.88 : 0.84;
-		player.y = canvas.height * bucketPositionRatio;
-		player.x = Math.min(player.x, canvas.width - player.w);
-
-		// Adjust bucket size on mobile for better visibility and control
+		// Adjust bucket size on mobile for better visibility and control FIRST
 		if (isMobile) {
 			player.w = 70;
 			player.h = 45;
@@ -76,13 +70,22 @@ function resizeCanvas() {
 			player.w = 80;
 			player.h = 50;
 		}
+
+		// On mobile, position bucket at 85% down (more space above)
+		// On desktop, position bucket at 84% down
+		const bucketPositionRatio = isMobile ? 0.88 : 0.84;
+		player.y = canvas.height * bucketPositionRatio;
+
+		// Clamp position AFTER size is updated to prevent edge bug
+		player.x = Math.max(0, Math.min(player.x, canvas.width - player.w));
 	}
 
 	// Adjust sawit position and size
 	if (sawit) {
-		sawit.x = Math.min(sawit.x, canvas.width - sawit.size);
 		// Slightly smaller sawit on mobile for better proportion
 		sawit.size = isMobile ? 35 : 40;
+		// Clamp position AFTER size is updated
+		sawit.x = Math.max(0, Math.min(sawit.x, canvas.width - sawit.size));
 	}
 }
 
